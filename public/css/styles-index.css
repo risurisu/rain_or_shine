@@ -48,6 +48,9 @@ body {
     .ui.form {
     font-size: 18px;
   }
+  .background-wrapper {
+    width: 60%;
+  }
 }
 @media (max-width: 699px) {
   .field input {
@@ -61,9 +64,12 @@ body {
     font-size: 18px;
   }
   .background-wrapper {
-    width: 80%;
+    width: 90%;
   }
   .ui.buttons .button, .ui.buttons .or, .ui.button {
-    border-radius: em;
+    border-radius: .15em;
+  }
+  .ui.form .field {
+    margin-bottom: 1em;
   }
 }
