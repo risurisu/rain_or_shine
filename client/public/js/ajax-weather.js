@@ -56,6 +56,10 @@ $(function() {
   ;
   getData();
 
+  $('.ui.accordion')
+  .accordion()
+;
+
   //TESTING
   // $('.menu .item')
   // .tab({

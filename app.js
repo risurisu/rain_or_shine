@@ -15,6 +15,8 @@ app.set('view engine', 'ejs');
 // process.env.MONGOLAB_URI is needed for when we deploy to Heroku
 mongoose.connect( process.env.MONGOLAB_URI || "mongodb://localhost/auth_template_app" );
 
+app.use(cookieParser());
+
 // log requests to STDOUT
 app.use(morgan('dev'));
 
@@ -30,10 +32,9 @@ app.use('/', indexRouter);
 var weatherRouter = require('./server/routes/weather.js');
 app.use('/weather', weatherRouter);
 
-var userRouter = require('./server/routes/user.js');
-app.use('/user', userRouter);
+var usersRouter = require('./server/routes/users.js');
+app.use('/user', usersRouter);
 
-app.use(cookieParser());
 
 // Set static file root folder
 app.use(express.static('client/public'));
