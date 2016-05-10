@@ -5,3 +5,9 @@ nav {
   text-align: right;
   color: white;
 }
+nav a {
+  color: white;
+}
+nav a:hover {
+  color: #00AEEF;
+}

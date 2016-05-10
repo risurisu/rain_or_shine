@@ -4,29 +4,56 @@
     <meta charset="utf-8">
     <title></title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="../css/semantic.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.3/jquery.js" charset="utf-8"></script>
+    <link rel="stylesheet" type="text/css" href="../semantic/dist/semantic.min.css">
+    <script src="../semantic/dist/semantic.min.js"></script>
     <link rel="stylesheet" href="../css/styles-weather.css">
-    <script src="../js/tab.js" charset="utf-8"></script>
-    <script>
-      var myTabs = tabs({
-        el: '#tabs',
-        tabNavigationLinks: '.c-tabs-nav__link',
-        tabContentContainers: '.c-tab'
-      });
-    </script>
+    <script src="../js/ajax-weather.js" charset="utf-8"></script>
+    <link rel="stylesheet" href="../css/styles.css">
   </head>
   <body>
+    <nav>
+      <div class="top">
+        <img src="../images/logo-white.svg" alt="" />
+      </div>
+      <div class="login">
+        <a href="#">Login</a>
+      </div>
+    </nav>
 
-    <div class="filters">
-      <form class="" action="index.html" method="post">
-        <input type="checkbox" name="name" value="">
-        <input type="checkbox" name="name" value="">
-      </form>
+    <div class="background-wrapper">
+      <div class="filters">
+        <h1>Events for <span class="city-zip"></span></h1>
+        <form id="event-weather-filters">
+          <select class="ui dropdown">
+            <option value="">Event Type</option>
+            <option value="1">Indoor</option>
+            <option value="0">Outdoor</option>
+          </select>
+          <div class="ui checkbox">
+            <input type="checkbox" name="example">
+            <label>Sports Event</label>
+          </div>
+          <div class="ui checkbox">
+            <input type="checkbox" name="example">
+            <label>Restaurant/Bar</label>
+          </div>
+          <div class="ui checkbox">
+            <input type="checkbox" name="example">
+            <label>Shows and Music</label>
+          </div>
+          <button class="ui primary button">
+            Save
+          </button>
+        </form>
+      </div>
     </div>
 
-    <nav class="ui menu">
-      <h3>Brand</h3>
-      <h3>Brand</h3>
-    </nav>
+    <div class="weather-data">
+      <div class="ui top attached tabular menu weather-week">
+
+      </div>
+    </div>
+
   </body>
 </html>
