@@ -33,21 +33,41 @@ function getData(zip){
 
 function createWeatherAccordian(index,data,singleDate){
 
-  var date = data.list.dt;
+  var date = singleDate.dt;
+
+  var newTimeStamp = new Date();
+  newTimeStamp.setTime(date*1000); // javascript timestamps are in milliseconds
+  date = newTimeStamp.toDateString();
+
+  console.log(date);
+
+
+
   var temp = Math.round(singleDate.temp.day);
-  var sky = singleDate.weather.description;
+  var weather = singleDate.weather;
+  var weatherType = singleDate.weather[0].main;
+  var weatherIcon = weather[0].icon + ".png";
   var minTemp = Math.round(singleDate.temp.min);
   var maxTemp = Math.round(singleDate.temp.max);
-
   var $mainDiv = $("#data-accordion");
-
+  var icon = $("<i class='dropdown icon'></i>")
   var $weatherTab = $("<div>").addClass("title");
-  $weatherTab.appendTo($mainDiv);
 
-  var temperature = $('<h2>').text(temp + "˚");
-  var min = $("<p>").text(minTemp + "˚");
-  var max = $("<p>").text(maxTemp + "˚");
-  $weatherTab.append(temperature);
+  $weatherTab.appendTo($mainDiv);
+  icon.appendTo($weatherTab);
+
+  var date = $('<h2>').text(date + " - ");
+
+  var weatherIconImg = $("<img>").attr("src", "http://openweathermap.org/img/w/" + weatherIcon);
+  console.log(weatherIconImg);
+
+  var iconDiv = $('<span>').addClass("weather-image").append(weatherIconImg);
+  var weatherTypeDiv = $('<span>').addClass("weather-type").append(weatherType);
+
+  var temperature = $('<h2>').addClass("blue").text(temp + "˚");
+  var min = $("<span>").text("Low " + minTemp + "˚");
+  var max = $("<span>").text("High " + maxTemp + "˚");
+  $weatherTab.append(date, temperature, iconDiv, weatherTypeDiv);
 
   var $eventDiv = $("<div>").addClass("content");
 
@@ -90,31 +110,9 @@ $(function() {
         zip : 'empty',
       }
   });
-  eventParser();
 
   $('.ui.accordion').accordion();
 
 
-  //TESTING
-  // $('.menu .item')
-  // .tab({
-  //   cache: false,
-  //   // faking API request
-  //   apiSettings: {
-  //     loadingDuration : 300,
-  //     mockResponse    : function(settings) {
-  //       var response = {
-  //         first  : 'AJAX Tab One',
-  //         second : 'AJAX Tab Two',
-  //         third  : 'AJAX Tab Three'
-  //       };
-  //       return response[settings.urlData.tab];
-  //     }
-  //   },
-  //   context : 'parent',
-  //   auto    : true,
-  //   path    : 'http://api.openweathermap.org/data/2.5/forecast/city?id=524901&APPID=1111111111'
-  // });
-  //TESTING
 
 });// onLoad
