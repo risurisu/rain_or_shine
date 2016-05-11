@@ -43,6 +43,8 @@ app.use('/', indexRouter);
 app.use('/api/auth', apiAuthRouter);
 app.use('/api/users', apiUsersRouter);
 
-app.listen( 8080, function(){
+var port = process.env.PORT || 8080;
+
+app.listen( port, function(){
   console.log( '... awaiting connections on port: 8080' );
 });
