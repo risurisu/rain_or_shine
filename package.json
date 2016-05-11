@@ -23,6 +23,7 @@
     "dotenv": "^2.0.0",
     "ejs": "^2.4.1",
     "express": "^4.13.4",
+    "jsonwebtoken": "^6.2.0",
     "mongoose": "^4.4.15",
     "morgan": "^1.7.0",
     "passport": "^0.3.2",

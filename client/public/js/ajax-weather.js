@@ -1,64 +1,95 @@
-$('.menu .item')
-  .tab()
-;
+$('.menu .item').tab();
 
-function getData(){
+var zip;
+function getZip(form){
+  $("i").on("click", function(){
+    zip = form.find("[name=zip]").val();
+    $(".modal-zip").fadeOut();
+    getData(zip);
+  })
+}
 
+function getData(zip){
   var key = "3cf4bf019f05b262b3e7ae8f899feebe"
-  var nameField = $("#city-zip");
   var query = "Hoboken";
 
   // query the API here!
-  $.getJSON('http://api.openweathermap.org/data/2.5/forecast/daily?q=' + query + '&units=imperial&cnt=7' + '&APPID=' + key, function(data){
+  $.getJSON('http://api.openweathermap.org/data/2.5/forecast/daily?q=' + zip + '&units=imperial&cnt=7' + '&APPID=' + key, function(data){
     var allDates = data.list;
 
     for (var i = 0; i < allDates.length; i++) {
       var singleDate = allDates[i];
-      var city = data.city.name;
-      var date = data.list.dt;
-      var temp = Math.round(singleDate.temp.day);
-      console.log(temp);
-      var sky = singleDate.weather.description;
-      var minTemp = Math.round(singleDate.temp.min);
-      var maxTemp = Math.round(singleDate.temp.max);
 
-      function createWeatherDiv(index){
-        var $weatherTab = $("<a class='item' data-tab="+index+">");
-        $weatherTab.appendTo(".weather-week");
-
-        var temperature = $('<h2>').text(temp + "˚");
-        $weatherTab.append(temperature);
-
-        var $weatherDiv = $('<div class="ui bottom attached tab segment" data-tab='+index+'>');
-        $weatherDiv.append($('<table>Whazzup LGIO '+index+'</table>'))
-        if (index===0){
-          $weatherTab.addClass('active');
-          $weatherDiv.addClass('active');
-        }
-        $weatherDiv.appendTo('.weather-data');
-      }
-      createWeatherDiv(i);
-
-
+      createWeatherAccordian(i,data,singleDate);
     }
-    $('.menu .item').tab();
 
-    $(".city-zip").text(city);
+    $(".city-zip").text(data.city.name);
 
   });
 
 }
 
+
+
+function createWeatherAccordian(index,data,singleDate){
+
+  var date = data.list.dt;
+  var temp = Math.round(singleDate.temp.day);
+  var sky = singleDate.weather.description;
+  var minTemp = Math.round(singleDate.temp.min);
+  var maxTemp = Math.round(singleDate.temp.max);
+
+  var $mainDiv = $("#data-accordion");
+
+  var $weatherTab = $("<div>").addClass("title");
+  $weatherTab.appendTo($mainDiv);
+
+  var temperature = $('<h2>').text(temp + "˚");
+  var min = $("<p>").text(minTemp + "˚");
+  var max = $("<p>").text(maxTemp + "˚");
+  $weatherTab.append(temperature);
+
+  var $eventDiv = $("<div>").addClass("content");
+  $eventDiv.append();
+
+  if (index===0){
+    $weatherTab.addClass('active');
+    $eventDiv.addClass('active');
+  }
+  $eventDiv.appendTo($mainDiv)
+}
+
+
+function eventParser() {
+	var severalEvents = mapEvents;
+  // console.log(severalEvents);
+
+  for (var i = 0; i < severalEvents.length; i++) {
+    var singleEvent = severalEvents[i];
+    var title = singleEvent.title;
+    var category = singleEvent.type;
+    var location = singleEvent.venue_name;
+  }
+}
+
+
 $(function() {
   console.log("YO WUT UP");
-  $('.ui.dropdown')
-    .dropdown()
-  ;
-  getData();
 
-  $('.ui.accordion')
-  .accordion()
-;
+  $('.ui.dropdown').dropdown();
+  var $form = $(".search-form");
+
+  getZip($form);
+  $('.ui.icon.input')
+    .form({
+      fields: {
+        zip : 'empty',
+      }
+  });
+  eventParser();
+
+  $('.ui.accordion').accordion();
+
 
   //TESTING
   // $('.menu .item')
