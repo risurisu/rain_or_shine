@@ -10,11 +10,13 @@
     <link rel="stylesheet" href="../css/styles-weather.css">
     <script src="../js/ajax-weather.js" charset="utf-8"></script>
     <script src="../js/test-data.js" charset="utf-8"></script>
+    <script src="../js/ajax-events.js" charset="utf-8"></script>
+    <script src="../js/filter.js" charset="utf-8"></script>
     <link rel="stylesheet" href="../css/styles.css">
   </head>
   <body>
 
-    <div class="modal-zip">
+    <!-- <div class="modal-zip">
 
       <div class="zip-container">
         <div class="background-wrapper">
@@ -26,7 +28,7 @@
         </div>
       </div>
 
-    </div>
+    </div> -->
 
     <div class="container">
 
@@ -41,30 +43,30 @@
         <form id="event-weather-filters">
 
           <div style="width:auto; font-size: inherit;" class="ui input">
-            <input type="text" placeholder="Update City...">
-          </div>
+       <input id='zipsearch' type="text" placeholder="Enter a Zipcode...">
+     </div>
 
-          <select class="ui dropdown">
+          <select id='drop' class="ui dropdown">
             <option value="">Event Type</option>
             <option value="1">Indoor</option>
-            <option value="0">Outdoor</option>
+            <option value="2">Outdoor</option>
             <option value="0">All</option>
           </select>
 
-          <div class="ui checkbox">
+          <div id='sports' class="ui checkbox sportsbox">
             <input type="checkbox" name="example">
             <label>Sports Event</label>
           </div>
-          <div class="ui checkbox">
+          <div id='shows' class="ui checkbox showsbox">
             <input type="checkbox" name="example">
-            <label>Restaurant & Bar</label>
+            <label>Shows</label>
           </div>
-          <div class="ui checkbox">
+          <div id='music' class="ui checkbox musicbox">
             <input type="checkbox" name="example">
             <label>Concerts</label>
           </div>
-          <button class="ui primary button">
-            Save
+          <button id = 'filtersearch' class="ui primary button">
+            Search
           </button>
         </form>
 

@@ -7,14 +7,17 @@ function getZip(form){
     $(".modal-zip").fadeOut();
     getData(zip);
   })
+
+
+
 }
 
 function getData(zip){
   var key = "3cf4bf019f05b262b3e7ae8f899feebe"
-  var query = "Hoboken";
 
   // query the API here!
-  $.getJSON('http://api.openweathermap.org/data/2.5/forecast/daily?q=' + zip + '&units=imperial&cnt=7' + '&APPID=' + key, function(data){
+  $.getJSON('http://api.openweathermap.org/data/2.5/forecast/daily?zip=' + 10025 + '&units=imperial&cnt=7' + '&APPID=' + key, function(data){
+    console.log(data);
     var allDates = data.list;
 
     for (var i = 0; i < allDates.length; i++) {
@@ -49,16 +52,45 @@ function createWeatherAccordian(index,data,singleDate){
   var max = $("<p>").text(maxTemp + "˚");
   $weatherTab.append(temperature);
 
+
   var $eventDiv = $("<div>").addClass("content");
 
   // ***********************
   // event data should go into between the parenthesis below
   // ***********************
-  $eventDiv.append(  );
+
 
   if (index===0){
     $weatherTab.addClass('active');
-    $eventDiv.addClass('active');
+    $eventDiv.addClass('active day1');
+  }
+  if (index===1){
+    $weatherTab.addClass('active');
+    $eventDiv.addClass('day2');
+  }
+  if (index===2){
+    $weatherTab.addClass('active');
+    $eventDiv.addClass('day3');
+  }
+  if (index===3){
+    $weatherTab.addClass('active');
+    $eventDiv.addClass('day4');
+  }
+  if (index===4){
+    $weatherTab.addClass('active');
+    $eventDiv.addClass('day5');
+  }
+  if (index===5){
+    $weatherTab.addClass('active');
+    $eventDiv.addClass('day6');
+  }
+  if (index===6){
+    $weatherTab.addClass('active');
+    $eventDiv.addClass('day7');
+  }
+  if (index===7){
+    $weatherTab.addClass('active');
+    $eventDiv.addClass('day3');
   }
   $eventDiv.appendTo($mainDiv)
 }
@@ -90,7 +122,7 @@ $(function() {
         zip : 'empty',
       }
   });
-  eventParser();
+
 
   $('.ui.accordion').accordion();
 
