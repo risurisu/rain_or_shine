@@ -13,7 +13,7 @@ app.set('view engine', 'ejs');
 
 // connect to db
 // process.env.MONGOLAB_URI is needed for when we deploy to Heroku
-mongoose.connect( process.env.MONGOLAB_URI || "mongodb://localhost/auth_template_app" );
+mongoose.connect( process.env.MONGOLAB_URI || "mongodb://localhost/user_auth" );
 
 app.use(cookieParser());
 

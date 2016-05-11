@@ -31,6 +31,7 @@ auth.submitLoginForm = function(){
 auth.loginSuccess = function( data, status, jqXHR){
   Cookies.set("jwt_token", data.token);
   auth.setLoggedInState();
+  window.location.href = data.redirect
 };
 
 auth.loginFailure = function(jqXHR){
@@ -40,7 +41,7 @@ auth.loginFailure = function(jqXHR){
 };
 
 auth.setLoggedInState = function(){
-  $(".forms.container").hide();
+  $("#login").hide();
   $("#logged-in-content").fadeIn(1000);
   auth.users.init();
 };
@@ -75,10 +76,18 @@ auth.users = {
 
 }
 
+
+
 auth.bindSwitchFormLinks = function(){
-  $("#login-link, #sign-up-link").on("click", function(e){
-      $("#sign-up-form, #login-form" ).toggleClass('hidden');
+  $("#login-link").on("click", function(e){
+    $("#login").hide();
+    $("#signup" ).fadeIn();
   });
+  $("#sign-up-link").on("click", function(e){
+    $("#signup").hide();
+    $("#login" ).fadeIn();
+  });
+
 };
 
 auth.bindLogoutLink = function(){
@@ -107,7 +116,7 @@ auth.getToken = function(){
 
 auth.setLoggedOutState = function() {
   $('#logged-in-content').hide();
-  $('.forms.container').fadeIn(1000);
+  $('#login').fadeIn(1000);
 }
 
 auth.bindSignUpForm = function(){
@@ -116,6 +125,10 @@ auth.bindSignUpForm = function(){
     auth.submitSignUpForm();
   });
 };
+
+auth.switchFormsOnSignup = function(){
+
+}
 
 auth.submitSignUpForm = function(){
   var $form    = $('#sign-up-form');
@@ -139,6 +152,10 @@ auth.submitSignUpForm = function(){
   $.post('/api/users', payload)
     .done(auth.signUpSuccess)
     .fail(auth.signUpFailure)
+
+  $("#signup").hide();
+  $("#login" ).fadeIn();
+
 };
 
 auth.signUpSuccess = function(data, status, jqXHR) {

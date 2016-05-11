@@ -1,0 +1,22 @@
+.ui {
+  margin: 0 auto;
+  max-width: 500px;
+}
+.hidden {
+  display: none;
+}
+h1 {
+  text-align: center;
+}
+.logo img {
+  max-width: 300px;
+  text-align: center;
+}
+nav {
+  text-align: center;
+  background-color: #333;
+  padding: 15px;
+}
+.form-container {
+  margin: 30px 15px;
+}

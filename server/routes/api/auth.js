@@ -15,9 +15,10 @@ usersRouter.post('/', passport.authenticate('local', { session: false }), functi
   var token = jwt.sign(req.user, process.env.JWT_SECRET, {
     expiresIn: 1440 // expires in 24 hours
   });
-  res.json({ token: token });
+  res.json({ token: token,
+  redirect: "/weather" });
   console.log(token);
-
+  // res.redirect('/weather')
 });
 
 
