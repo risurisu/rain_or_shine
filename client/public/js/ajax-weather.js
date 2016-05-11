@@ -50,7 +50,11 @@ function createWeatherAccordian(index,data,singleDate){
   $weatherTab.append(temperature);
 
   var $eventDiv = $("<div>").addClass("content");
-  $eventDiv.append();
+
+  // ***********************
+  // event data should go into between the parenthesis below
+  // ***********************
+  $eventDiv.append(  );
 
   if (index===0){
     $weatherTab.addClass('active');
@@ -60,17 +64,17 @@ function createWeatherAccordian(index,data,singleDate){
 }
 
 
-function eventParser() {
-	var severalEvents = mapEvents;
-  // console.log(severalEvents);
-
-  for (var i = 0; i < severalEvents.length; i++) {
-    var singleEvent = severalEvents[i];
-    var title = singleEvent.title;
-    var category = singleEvent.type;
-    var location = singleEvent.venue_name;
-  }
-}
+// function eventParser() {
+// 	var severalEvents = mapEvents;
+//   // console.log(severalEvents);
+//
+//   for (var i = 0; i < severalEvents.length; i++) {
+//     var singleEvent = severalEvents[i];
+//     var title = singleEvent.title;
+//     var category = singleEvent.type;
+//     var location = singleEvent.venue_name;
+//   }
+// }
 
 
 $(function() {
