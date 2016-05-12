@@ -35,6 +35,8 @@ app.use('/weather', weatherRouter);
 var usersRouter = require('./server/routes/users.js');
 app.use('/user', usersRouter);
 
+var eventRouter = require('./server/routes/api/event.js');
+
 
 // Set static file root folder
 app.use(express.static('client/public'));
@@ -42,6 +44,7 @@ app.use(express.static('client/public'));
 app.use('/', indexRouter);
 app.use('/api/auth', apiAuthRouter);
 app.use('/api/users', apiUsersRouter);
+app.use('/events', eventRouter);
 
 var port = process.env.PORT || 8080;
 

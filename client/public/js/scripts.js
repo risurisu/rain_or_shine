@@ -30,6 +30,7 @@ auth.submitLoginForm = function(){
 
 auth.loginSuccess = function( data, status, jqXHR){
   Cookies.set("jwt_token", data.token);
+  Cookies.set("currentuser", data.user);
   auth.setLoggedInState();
   window.location.href = data.redirect
 };
@@ -69,8 +70,12 @@ auth.users = {
     var $container = $("#users-container");
     users.forEach( function(user){
       var $user = $("<li>");
+      var $usersaved =  $('<div>').text(user.events[0].name)
       $("#username-display").text(user.username);
-      $user.html("Username: " + user.username + " <br/> Email: " + user.email );
+
+      $('.user-profile').append($usersaved)
+
+      // $user.html("Username: " + user.username + " <br/> Email: " + user.email );
       $container.append($user);
     });
   }
@@ -95,6 +100,7 @@ auth.bindLogoutLink = function(){
   $("#log-out-link").on("click", function(e){
     console.log("click");
     Cookies.remove("jwt_token");
+    Cookies.remove("currentuser");
     auth.checkLoggedInStatus();
   } );
 }
