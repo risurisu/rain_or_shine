@@ -87,15 +87,6 @@ function createWeatherAccordian(index,data,singleDate){
 
   var $eventDiv = $("<div>").addClass("content");
 
-// //<<<<<<< HEAD
-//   $("#cloudy").appendTo(.description);
-//   $("#partly-cloudy").appendTo(.description);
-//   $("#rainy").appendTo(.description);
-//   $("#sunny").appendTo(.description);
-//   $("#windy").appendTo(.description);
-//=======
-//>>>>>>> 12835897c7e25b09eece932c62719e9d1df5e0d2
-
   // ***********************
   // event data should go into between the parenthesis below
   // ***********************
