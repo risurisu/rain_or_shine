@@ -7,14 +7,27 @@ function getZip(form){
     $(".modal-zip").fadeOut();
     getData(zip);
   })
+
+
+
+}
+
+var setGlobalEmptyState = function() {
+  $('.content').each(function(i, el) {
+    var $content = $(el);
+    if (isEmpty($content)) {
+      var noEvents = $("<h3>").text("No Events to Display");
+      noEvents.appendTo($content);
+    }
+  })
 }
 
 function getData(zip){
   var key = "3cf4bf019f05b262b3e7ae8f899feebe"
-  var query = "Hoboken";
 
   // query the API here!
-  $.getJSON('http://api.openweathermap.org/data/2.5/forecast/daily?q=' + zip + '&units=imperial&cnt=7' + '&APPID=' + key, function(data){
+  $.getJSON('http://api.openweathermap.org/data/2.5/forecast/daily?zip=' + zip + '&units=imperial&cnt=7' + '&APPID=' + key, function(data){
+    console.log(data);
     var allDates = data.list;
 
     for (var i = 0; i < allDates.length; i++) {
@@ -29,62 +42,106 @@ function getData(zip){
 
 }
 
-
+function isEmpty( el ){
+  return !$.trim(el.html())
+}
 
 function createWeatherAccordian(index,data,singleDate){
 
-  var date = data.list.dt;
+  var date = singleDate.dt;
+
+  var newTimeStamp = new Date();
+  newTimeStamp.setTime(date*1000); // javascript timestamps are in milliseconds
+  date = newTimeStamp.toDateString();
+
+  console.log(date);
+
+
+
   var temp = Math.round(singleDate.temp.day);
-  var sky = singleDate.weather.description;
+  var weather = singleDate.weather;
+  var weatherType = singleDate.weather[0].main;
+  var weatherIcon = weather[0].icon + ".png";
   var minTemp = Math.round(singleDate.temp.min);
   var maxTemp = Math.round(singleDate.temp.max);
-
   var $mainDiv = $("#data-accordion");
-
+  var icon = $("<i class='dropdown icon'></i>")
   var $weatherTab = $("<div>").addClass("title");
+
   $weatherTab.appendTo($mainDiv);
+  icon.appendTo($weatherTab);
+
+  var date = $('<h2>').text(date + " : ");
+
+  var weatherIconImg = $("<img>").attr("src", "http://openweathermap.org/img/w/" + weatherIcon);
+  console.log(weatherIconImg);
+
+  var iconDiv = $('<span>').addClass("weather-image").append(weatherIconImg);
+  var weatherTypeDiv = $('<span>').addClass("weather-type").append(weatherType);
 
   var temperature = $('<h2>').text(temp + "˚");
-  var min = $("<p>").text(minTemp + "˚");
-  var max = $("<p>").text(maxTemp + "˚");
-  $weatherTab.append(temperature);
+  var min = $("<span>").text("Low " + minTemp + "˚");
+  var max = $("<span>").text("High " + maxTemp + "˚");
+  $weatherTab.append(date, temperature, iconDiv, weatherTypeDiv);
+
 
   var $eventDiv = $("<div>").addClass("content");
 
-  $("#cloudy").appendTo(.description);
-  $("#partly-cloudy").appendTo(.description);
-  $("#rainy").appendTo(.description);
-  $("#sunny").appendTo(.description);
-  $("#windy").appendTo(.description);
+// //<<<<<<< HEAD
+//   $("#cloudy").appendTo(.description);
+//   $("#partly-cloudy").appendTo(.description);
+//   $("#rainy").appendTo(.description);
+//   $("#sunny").appendTo(.description);
+//   $("#windy").appendTo(.description);
+//=======
+//>>>>>>> 12835897c7e25b09eece932c62719e9d1df5e0d2
 
   // ***********************
   // event data should go into between the parenthesis below
   // ***********************
-  $eventDiv.append(  );
 
   if (index===0){
-    $weatherTab.addClass('active');
-    $eventDiv.addClass('active');
+      $weatherTab.addClass('active');
+      $eventDiv.addClass('active day1');
+    }
+    if (index===1){
+      $eventDiv.addClass('day2');
+    }
+    if (index===2){
+      $eventDiv.addClass('day3');
+    }
+    if (index===3){
+      $eventDiv.addClass('day4');
+    }
+    if (index===4){
+      $eventDiv.addClass('day5');
+    }
+    if (index===5){
+      $eventDiv.addClass('day6');
+    }
+    if (index===6){
+      $eventDiv.addClass('day7');
+    }
+    if (index===7){
+      $eventDiv.addClass('day3');
+    }
+    $eventDiv.appendTo($mainDiv);
+
   }
-  $eventDiv.appendTo($mainDiv)
+
+
+function empty(){
+  if( $('.content').is(':empty') ) {
+    $(".content").text("No events available.");
+  }else {
+    $(".content").text("Insert Event Here");
+  }
+  console.log("empty function");
 }
-
-
-// function eventParser() {
-// 	var severalEvents = mapEvents;
-//   // console.log(severalEvents);
-//
-//   for (var i = 0; i < severalEvents.length; i++) {
-//     var singleEvent = severalEvents[i];
-//     var title = singleEvent.title;
-//     var category = singleEvent.type;
-//     var location = singleEvent.venue_name;
-//   }
-// }
+empty();
 
 
 $(function() {
-  console.log("YO WUT UP");
 
   $('.ui.dropdown').dropdown();
   var $form = $(".search-form");
@@ -96,31 +153,12 @@ $(function() {
         zip : 'empty',
       }
   });
-  eventParser();
+
 
   $('.ui.accordion').accordion();
 
-
-  //TESTING
-  // $('.menu .item')
-  // .tab({
-  //   cache: false,
-  //   // faking API request
-  //   apiSettings: {
-  //     loadingDuration : 300,
-  //     mockResponse    : function(settings) {
-  //       var response = {
-  //         first  : 'AJAX Tab One',
-  //         second : 'AJAX Tab Two',
-  //         third  : 'AJAX Tab Three'
-  //       };
-  //       return response[settings.urlData.tab];
-  //     }
-  //   },
-  //   context : 'parent',
-  //   auto    : true,
-  //   path    : 'http://api.openweathermap.org/data/2.5/forecast/city?id=524901&APPID=1111111111'
-  // });
-  //TESTING
+  $('.ui.modal')
+    .modal('hide')
+  ;
 
 });// onLoad

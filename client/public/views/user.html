@@ -2,100 +2,152 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title></title>
+    <title>Rain or Shine | Login</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/js-cookie/2.1.1/js.cookie.min.js" charset="utf-8"></script>
     <link rel="stylesheet" type="text/css" href="../semantic/dist/semantic.min.css">
+    <link rel="stylesheet" href="../css/styles.css" media="screen" title="no title" charset="utf-8">
+    <link rel="stylesheet" href="../css/styles-user.css" media="screen" title="no title" charset="utf-8">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.3/jquery.js" charset="utf-8"></script>
     <script src="../semantic/dist/semantic.min.js"></script>
     <script src="../js/scripts.js" charset="utf-8"></script>
   </head>
   <body>
+  <nav>
+    <div class="logo">
+      <a href="/weather">
+        <img src="../images/logo-white.svg" alt="" />
+      </a>
+    </div>
+  </nav>
 
-
-        <div class="main container">
-
-          <div class="row">
-            <div id="alert-msg" class="col-md-4 col-centered" style="display: none;">
-              <!-- Msg goes here -->
-            </div>
-          </div>
-          <div id="logged-in-content" class="container row" style="display:none;">
-            <div class="col-md-6 col-centered">
-              <h1>You are logged In!</h1>
-              <a href="#" id="log-out-link">Logout</a>
-            </div>
-
-            <div class="col-md-6 col-centered">
-              <div id="users-section">
-                <h3>Users in my database:</h3>
-                <ul id="users-container">
-                  <!-- Users go here -->
-                </ul>
+  <div class="form-container">
+    <!-- LOG IN START -->
+    <div id="login" class="ui">
+      <h1>Login to Your Account</h1>
+      <div class="column">
+        <form id="login-form" class="ui large form">
+          <div class="ui stacked segment">
+            <div class="field">
+              <div class="ui left icon input">
+                <i class="user icon"></i>
+                <input type="text" name="username" placeholder="Username">
               </div>
             </div>
-          </div>
-          <div class="forms container row">
-            <div class="col-md-4 col-centered">
-
-              <!-- Log In -->
-              <form id="login-form">
-                <div class="form-group">
-                  <input type="text" name="username" value="" placeholder="username">
-                  <input type="password" name="password" value="" placeholder="password">
-                </div>
-                <div class="form-group">
-                  <a href="#" id="sign-up-link">haven't sign-up yet? click here</a>
-                </div>
-                <button type="submit" class="btn btn-default" name="button">Log in</button>
-              </form>
-
-              <!-- Sign up -->
-              <form id="sign-up-form" class="hidden">
-                <div class="form-grup">
-                  <input type="text" name="username" value="" placeholder="username">
-                  <input type="text" name="email" value="" placeholder="email">
-                  <input type="password" name="password" value="" placeholder="password">
-                  <input type="password" name="password_confirm" value="" placeholder="password confirm">
-                </div>
-                <div class="form-group">
-                  <a href="#" id="login-link">Already have an account? click here</a>
-                </div>
-                <button type="submit" class="btn btn-default" name="button">Sign up</button>
-              </form>
-
-              <!-- Items Form -->
+            <div class="field">
+              <div class="ui left icon input">
+                <i class="lock icon"></i>
+                <input type="password" name="password" placeholder="Password">
+              </div>
             </div>
+
+            <button id="login-form-btn" class="ui primary fluid large button" type="submit" name="button">Login</button>
           </div>
 
+          <div class="ui error message"></div>
 
+        </form>
+
+        <div class="ui message">
+          New to us? <a id="login-link" href="#">Sign Up</a>
+        </div>
+      </div>
+
+    </div>
+    <!-- LOG IN END -->
+
+
+    <!-- SIGN UP START -->
+    <div id="signup" class="ui hidden">
+      <h1>Signup</h1>
+      <div class="column">
+        <form id="sign-up-form" class="ui large form">
+          <div class="ui stacked segment">
+            <div class="field">
+              <div class="ui left icon input">
+                <i class="user icon"></i>
+                <input type="text" name="username" placeholder="Username">
+              </div>
+            </div>
+            <div class="field">
+              <div class="ui left icon input">
+                <i class="mail icon"></i>
+                <input type="text" name="email" placeholder="Email">
+              </div>
+            </div>
+            <div class="field">
+              <div class="ui left icon input">
+                <i class="lock icon"></i>
+                <input type="password" name="password" placeholder="Password">
+              </div>
+            </div>
+            <div class="field">
+              <div class="ui left icon input">
+                <i class="lock icon"></i>
+                <input type="password" name="password_confirm" placeholder="Confirm Password">
+              </div>
+            </div>
+
+            <button id="sign-up-form-btn" class="ui primary fluid large button" type="submit" name="button">Sign Up</button>
+          </div>
+
+          <div class="ui error message"></div>
+
+        </form>
+
+        <div class="ui message">
+          <a id="sign-up-link" href="#">Already have an account?</a>
+        </div>
+      </div>
+
+    </div>
+    <!-- SIGN UP END -->
+
+  </div>
+
+
+  <div class="main container">
+
+    <div class="row">
+      <div id="alert-msg" class="col-md-4 col-centered" style="display: none;">
+        <!-- Msg goes here -->
+      </div>
+    </div>
+
+      <div id="logged-in-content" class="container row" style="display:none;">
+
+        <div id="welcome">
+          <h1>Welcome Back <span id="username-display"></span></h1>
+          <a href="#" id="log-out-link">
+            <button class="ui secondary button">
+              Logout
+            </button>
+          </a>
 
 
         </div>
 
+        <div class="user-profile">
+          <h2>My Favorited Events <i class="heart icon"></i></h2>
+          <hr>
+        </div>
+      </div>
+  </div>
+
+
+      <!-- <div class="col-md-6 col-centered">
+        <div id="users-section">
+          <h3>Users in my database:</h3>
+          <ul id="users-container">
+          </ul>
+        </div>
+      </div> -->
 
 
 
-    <!-- <h1>Login</h1>
 
-    <form method="post" id="login">
-      <input type="text" name="username" value="" placeholder="Username">
-      <input type="text" name="password" value="" placeholder="Password">
-      <input type="submit" name="submit" value="Submit">
-    </form>
 
-    <a href="#">Don't have an account? Sign up!</a>
-
-    <h1>Sign up</h1>
-
-    <form method="post" id="signup">
-      <input type="text" name="username" value="" placeholder="Username">
-      <input type="text" name="email" value="" placeholder="Email">
-      <input type="text" name="password" value="" placeholder="Password">
-      <input type="submit" name="submit" value="Submit">
-    </form>
-
-    <a href="#">Already have an account?</a> -->
+  </div>
 
   </body>
 </html>

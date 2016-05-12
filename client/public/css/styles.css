@@ -1,10 +1,7 @@
-nav {
-  background-color: rgba(0, 0, 0, 0.5);
-  width: 100%;
-  padding: 15px;
-  text-align: right;
-  color: white;
+body {
+  background-image: url("../images/weather.png")
 }
+
 nav a {
   color: white;
 }

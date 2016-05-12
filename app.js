@@ -13,7 +13,7 @@ app.set('view engine', 'ejs');
 
 // connect to db
 // process.env.MONGOLAB_URI is needed for when we deploy to Heroku
-mongoose.connect( process.env.MONGOLAB_URI || "mongodb://localhost/auth_template_app" );
+mongoose.connect( process.env.MONGODB_URI || "mongodb://localhost/user_auth" );
 
 app.use(cookieParser());
 
@@ -43,6 +43,8 @@ app.use('/', indexRouter);
 app.use('/api/auth', apiAuthRouter);
 app.use('/api/users', apiUsersRouter);
 
-app.listen( 8080, function(){
+var port = process.env.PORT || 8080;
+
+app.listen( port, function(){
   console.log( '... awaiting connections on port: 8080' );
 });

@@ -1,0 +1,69 @@
+.ui {
+  margin: 0 auto;
+  max-width: 500px;
+}
+.hidden {
+  display: none;
+}
+h1 {
+  text-align: center;
+}
+.logo img {
+  max-width: 300px;
+  text-align: center;
+}
+nav {
+  text-align: center;
+  background-color: #333;
+  padding: 15px;
+}
+.form-container {
+  margin: 30px 15px;
+}
+.user-profile {
+  background-color: rgba(255, 255, 255, 0.7);
+  padding: 15px;
+  width: 60%;
+  margin: 0 auto;
+}
+
+#welcome {
+    margin: 0 auto;
+    text-align: center;
+    margin-bottom: 25px;
+}
+#welcome h1 {
+  display: inline-block;
+  margin-right: 25px;
+}
+.right {
+  text-align: right;
+}
+.left {
+  text-align: left;
+}
+.ui {
+  max-width: 800px;
+}
+hr {
+  height: 1px;
+  border: 0;
+  border-bottom: 1px solid #e0e0e0;
+}
+#login {
+  max-width: 500px;
+}
+#signup {
+  max-width: 500px;
+}
+@media (max-width: 719px) {
+  h1 {
+    font-size: 20px;
+  }
+  .user-profile {
+    width: 90%;
+  }
+  h2 {
+    font-size: 18px;
+  }
+}
