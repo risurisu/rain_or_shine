@@ -195,25 +195,31 @@ enddate = year + "-" + month + "-" + (day+7);
 
 eventnew = year + '0' + month + day + '00' + "-" + year + '0' +month + (day+7)+ '00'
 
-$.getJSON('https://api.seatgeek.com/2/events?venue.id=7962&datetime_utc.gte='+ newdate +'&datetime_utc.lte=' + enddate, function(json){geekParser(json)})
-$.getJSON('https://api.seatgeek.com/2/events?venue.id=2118&datetime_utc.gte='+ newdate + '&datetime_utc.lte='+ enddate, function(json){geekParser(json)})
-$.getJSON('https://api.seatgeek.com/2/events?taxonomies.name=mlb&venue.city=bronx&datetime_utc.gte='+newdate+'&datetime_utc.lte='+enddate, function(json){geekParser(json)})
-$.getJSON('https://api.seatgeek.com/2/events?taxonomies.id=2010000&venue.city=ny&datetime_utc.gte='+ newdate+'&datetime_utc.lte='+enddate, function(json){geekParser(json)})
-$.getJSON('https://api.seatgeek.com/2/events?taxonomies.name=sports&venue.city=ny&datetime_utc.gte='+ newdate+'&datetime_utc.lte='+enddate, function(json){geekParser(json)})
-$.getJSON('https://api.seatgeek.com/2/events?taxonomies.name=theater&venue.city=brooklyn&datetime_utc.gte='+ newdate+'&datetime_utc.lte='+enddate, function(json){geekParser(json)})
-$.getJSON('https://api.seatgeek.com/2/events?taxonomies.name=theater&venue.city=ny&datetime_utc.gte='+ newdate+'&datetime_utc.lte='+enddate, function(json){geekParser(json)})
-$.getJSON('https://api.seatgeek.com/2/events?taxonomies.name=mlb&venue.city=flushing&datetime_utc.gte='+newdate+'&datetime_utc.lte='+enddate, function(json){geekParser(json)})
-$.getJSON('http://api.eventful.com/json/events/search?location='+zipcode+'&app_key=3twjh79SHQ9wBjrx&date='+eventnew+'&q=music&callback=?', function(json){eventParsermusic(json)})
-$.getJSON('http://api.eventful.com/json/events/search?location='+zipcode+'&app_key=3twjh79SHQ9wBjrx&date='+eventnew+'&q=comedy&callback=?', function(json){eventParsercomedy(json)})
-$.getJSON('http://api.eventful.com/json/events/search?location='+zipcode+'&app_key=3twjh79SHQ9wBjrx&date='+eventnew+'&q=shows&callback=?', function(json){eventParsershows(json);})
+var ajax1 = $.getJSON('https://api.seatgeek.com/2/events?venue.id=7962&datetime_utc.gte='+ newdate +'&datetime_utc.lte=' + enddate, function(json){geekParser(json)})
+var ajax2 = $.getJSON('https://api.seatgeek.com/2/events?venue.id=2118&datetime_utc.gte='+ newdate + '&datetime_utc.lte='+ enddate, function(json){geekParser(json)})
+var ajax3 = $.getJSON('https://api.seatgeek.com/2/events?taxonomies.name=mlb&venue.city=bronx&datetime_utc.gte='+newdate+'&datetime_utc.lte='+enddate, function(json){geekParser(json)})
+var ajax4 = $.getJSON('https://api.seatgeek.com/2/events?taxonomies.id=2010000&venue.city=ny&datetime_utc.gte='+ newdate+'&datetime_utc.lte='+enddate, function(json){geekParser(json)})
+var ajax5 = $.getJSON('https://api.seatgeek.com/2/events?taxonomies.name=sports&venue.city=ny&datetime_utc.gte='+ newdate+'&datetime_utc.lte='+enddate, function(json){geekParser(json)})
+var ajax6 = $.getJSON('https://api.seatgeek.com/2/events?taxonomies.name=theater&venue.city=brooklyn&datetime_utc.gte='+ newdate+'&datetime_utc.lte='+enddate, function(json){geekParser(json)})
+var ajax7 = $.getJSON('https://api.seatgeek.com/2/events?taxonomies.name=theater&venue.city=ny&datetime_utc.gte='+ newdate+'&datetime_utc.lte='+enddate, function(json){geekParser(json)})
+var ajax8 = $.getJSON('https://api.seatgeek.com/2/events?taxonomies.name=mlb&venue.city=flushing&datetime_utc.gte='+newdate+'&datetime_utc.lte='+enddate, function(json){geekParser(json)})
+var ajax9 = $.getJSON('http://api.eventful.com/json/events/search?location='+zipcode+'&app_key=3twjh79SHQ9wBjrx&date='+eventnew+'&q=music&callback=?', function(json){eventParsermusic(json)})
+var ajax10 = $.getJSON('http://api.eventful.com/json/events/search?location='+zipcode+'&app_key=3twjh79SHQ9wBjrx&date='+eventnew+'&q=comedy&callback=?', function(json){eventParsercomedy(json)})
+var ajax11 = $.getJSON('http://api.eventful.com/json/events/search?location='+zipcode+'&app_key=3twjh79SHQ9wBjrx&date='+eventnew+'&q=shows&callback=?', function(json){eventParsershows(json);})
 
 
+$.when(ajax1, ajax2, ajax3, ajax4, ajax5, ajax6, ajax7, ajax8, ajax9, ajax10, ajax11).then(function() {
+  filterRender();
+  setGlobalEmptyState();
+})
 }
 
 
 
 function geekParser(json){
-var object = json.events
+
+
+var object = json.events || [];
 for (var i = 0; i < object.length; i++) {
     var geekobj = {}
      geekobj.title = object[i].title
@@ -231,46 +237,60 @@ for (var i = 0; i < object.length; i++) {
 
 
 function eventParsermusic(json){
-var events = json.events.event
-  for (var i = 0; i < events.length; i++) {
-      var eventfulobj = {}
-       eventfulobj.title = events[i].title
-       eventfulobj.venue_name = events[i].venue_name
-       eventfulobj.venue_address = events[i].venue_address
-       eventfulobj.time = events[i].start_time
-       eventfulobj.type = 'music'
-       eventfulobj.day = new Date(eventfulobj.time).getDay()
-       weekObjectParser(eventfulobj)
-      //  eventRender(eventfulobj)
+
+  if (json.events) {
+
+    var events = json.events.event
+    for (var i = 0; i < events.length; i++) {
+        var eventfulobj = {}
+         eventfulobj.title = events[i].title
+         eventfulobj.venue_name = events[i].venue_name
+         eventfulobj.venue_address = events[i].venue_address
+         eventfulobj.time = events[i].start_time
+         eventfulobj.type = 'music'
+         eventfulobj.day = new Date(eventfulobj.time).getDay()
+         weekObjectParser(eventfulobj)
+        //  eventRender(eventfulobj)
+    }
   }
+
+
 }
 function eventParsercomedy(json){
-var events = json.events.event
-  for (var i = 0; i < events.length; i++) {
-      var eventfulobj = {}
-       eventfulobj.title = events[i].title
-       eventfulobj.venue_name = events[i].venue_name
-       eventfulobj.venue_address = events[i].venue_address
-       eventfulobj.time = events[i].start_time
-       eventfulobj.type = 'comedy'
-       eventfulobj.day = new Date(eventfulobj.time).getDay()
-       weekObjectParser(eventfulobj)
-      //  eventRender(eventfulobj)
+
+  if (json.events) {
+
+    var events = json.events.event
+    for (var i = 0; i < events.length; i++) {
+        var eventfulobj = {}
+         eventfulobj.title = events[i].title
+         eventfulobj.venue_name = events[i].venue_name
+         eventfulobj.venue_address = events[i].venue_address
+         eventfulobj.time = events[i].start_time
+         eventfulobj.type = 'comedy'
+         eventfulobj.day = new Date(eventfulobj.time).getDay()
+         weekObjectParser(eventfulobj)
+        //  eventRender(eventfulobj)
+    }
   }
 }
 function eventParsershows(json){
-var events = json.events.event
-  for (var i = 0; i < events.length; i++) {
-      var eventfulobj = {}
-       eventfulobj.title = events[i].title
-       eventfulobj.venue_name = events[i].venue_name
-       eventfulobj.venue_address = events[i].venue_address
-       eventfulobj.time = events[i].start_time
-       eventfulobj.type = 'shows'
-       eventfulobj.day = new Date(eventfulobj.time).getDay()
-       weekObjectParser(eventfulobj)
-      //  eventRender(eventfulobj)
+  console.log(json);
+  if (json.events) {
+    var events = json.events.event
+    for (var i = 0; i < events.length; i++) {
+        var eventfulobj = {}
+         eventfulobj.title = events[i].title
+         eventfulobj.venue_name = events[i].venue_name
+         eventfulobj.venue_address = events[i].venue_address
+         eventfulobj.time = events[i].start_time
+         eventfulobj.type = 'shows'
+         eventfulobj.day = new Date(eventfulobj.time).getDay()
+         weekObjectParser(eventfulobj)
+        //  eventRender(eventfulobj)
+    }
   }
+
 }
 
 
@@ -443,28 +463,32 @@ function showsRender(obj){
      eventTitleHandler(obj);
    });
 
-
-
-
    if(obj.day==0){
+    //  $('.day7').text('')
      $('.day7').append(title, type)
    }
    if(obj.day==1){
+    //  $('.day1').text('')
      $('.day1').append(title, type)
    }
    if(obj.day==2){
+    //  $('.day2').text('')
      $('.day2').append(title, type)
    }
    if(obj.day==3){
+
      $('.day3').append(title, type)
    }
    if(obj.day==4){
+    //  $('.day4').text('')
      $('.day4').append(title, type)
    }
    if(obj.day==5){
+    //  $('.day5').text('')
      $('.day5').append(title, type)
    }
    if(obj.day==6){
+      // $('.day6').text('')
      $('.day6').append(title, type)
    }
   }
@@ -477,7 +501,8 @@ function eventTitleHandler(obj){
     venuename = $('<p>').text(obj.venue_name);
     venueaddress = $('<p>').text(obj.venue_address);
 
-    $(".close").on("click", function(){
+    $(".close").on("click", function(e){
+      e.preventDefault();
       $(".header").empty();
       $(".time-tag").empty();
       $(".location-tag").empty();
@@ -491,9 +516,6 @@ function eventTitleHandler(obj){
 
 }
 
-function closeModal(){
-}
-closeModal();
 
 
 function weekObjectParser(obj){

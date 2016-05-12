@@ -12,6 +12,16 @@ function getZip(form){
 
 }
 
+var setGlobalEmptyState = function() {
+  $('.content').each(function(i, el) {
+    var $content = $(el);
+    if (isEmpty($content)) {
+      var noEvents = $("<h3>").text("No Events to Display");
+      noEvents.appendTo($content);
+    }
+  })
+}
+
 function getData(zip){
   var key = "3cf4bf019f05b262b3e7ae8f899feebe"
 
@@ -32,7 +42,9 @@ function getData(zip){
 
 }
 
-
+function isEmpty( el ){
+  return !$.trim(el.html())
+}
 
 function createWeatherAccordian(index,data,singleDate){
 
@@ -75,6 +87,7 @@ function createWeatherAccordian(index,data,singleDate){
 
   var $eventDiv = $("<div>").addClass("content");
 
+
   // ***********************
   // event data should go into between the parenthesis below
   // ***********************
@@ -104,7 +117,8 @@ function createWeatherAccordian(index,data,singleDate){
     if (index===7){
       $eventDiv.addClass('day3');
     }
-    $eventDiv.appendTo($mainDiv)
+    $eventDiv.appendTo($mainDiv);
+
   }
 
 
