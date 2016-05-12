@@ -15,7 +15,9 @@
   <body>
   <nav>
     <div class="logo">
-      <img src="../images/logo-white.svg" alt="" />
+      <a href="/weather">
+        <img src="../images/logo-white.svg" alt="" />
+      </a>
     </div>
   </nav>
 
@@ -100,7 +102,9 @@
 
     </div>
     <!-- SIGN UP END -->
+
   </div>
+
 
   <div class="main container">
 
@@ -110,22 +114,34 @@
       </div>
     </div>
 
+      <div id="logged-in-content" class="container row" style="display:none;">
 
-    <div id="logged-in-content" class="container row" style="display:none;">
-      <div class="col-md-6 col-centered">
-        <h1>You are logged In!</h1>
-        <a href="#" id="log-out-link">Logout</a>
+        <div id="welcome">
+          <h1>Welcome Back <span id="username-display"></span></h1>
+          <a href="#" id="log-out-link">
+            <button class="ui secondary button">
+              Logout
+            </button>
+          </a>
+
+
+        </div>
+
+        <div class="user-profile">
+          <h2>My Favorited Events <i class="heart icon"></i></h2>
+          <hr>
+        </div>
       </div>
+  </div>
 
-      <div class="col-md-6 col-centered">
+
+      <!-- <div class="col-md-6 col-centered">
         <div id="users-section">
           <h3>Users in my database:</h3>
           <ul id="users-container">
-            <!-- Users go here -->
           </ul>
         </div>
-      </div>
-    </div>
+      </div> -->
 
 
 

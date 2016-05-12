@@ -69,6 +69,7 @@ auth.users = {
     var $container = $("#users-container");
     users.forEach( function(user){
       var $user = $("<li>");
+      $("#username-display").text(user.username);
       $user.html("Username: " + user.username + " <br/> Email: " + user.email );
       $container.append($user);
     });

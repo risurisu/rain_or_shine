@@ -67,7 +67,7 @@ function createWeatherAccordian(index,data,singleDate){
   var iconDiv = $('<span>').addClass("weather-image").append(weatherIconImg);
   var weatherTypeDiv = $('<span>').addClass("weather-type").append(weatherType);
 
-  var temperature = $('<h2>').addClass("blue").text(temp + "˚");
+  var temperature = $('<h2>').text(temp + "˚");
   var min = $("<span>").text("Low " + minTemp + "˚");
   var max = $("<span>").text("High " + maxTemp + "˚");
   $weatherTab.append(date, temperature, iconDiv, weatherTypeDiv);
@@ -79,58 +79,47 @@ function createWeatherAccordian(index,data,singleDate){
   // event data should go into between the parenthesis below
   // ***********************
 
-
   if (index===0){
-    $weatherTab.addClass('active');
-    $eventDiv.addClass('active day1');
+      $weatherTab.addClass('active');
+      $eventDiv.addClass('active day1');
+    }
+    if (index===1){
+      $eventDiv.addClass('day2');
+    }
+    if (index===2){
+      $eventDiv.addClass('day3');
+    }
+    if (index===3){
+      $eventDiv.addClass('day4');
+    }
+    if (index===4){
+      $eventDiv.addClass('day5');
+    }
+    if (index===5){
+      $eventDiv.addClass('day6');
+    }
+    if (index===6){
+      $eventDiv.addClass('day7');
+    }
+    if (index===7){
+      $eventDiv.addClass('day3');
+    }
+    $eventDiv.appendTo($mainDiv)
   }
-  if (index===1){
-    $weatherTab.addClass('active');
-    $eventDiv.addClass('day2');
+
+
+function empty(){
+  if( $('.content').is(':empty') ) {
+    $(".content").text("No events available.");
+  }else {
+    $(".content").text("Insert Event Here");
   }
-  if (index===2){
-    $weatherTab.addClass('active');
-    $eventDiv.addClass('day3');
-  }
-  if (index===3){
-    $weatherTab.addClass('active');
-    $eventDiv.addClass('day4');
-  }
-  if (index===4){
-    $weatherTab.addClass('active');
-    $eventDiv.addClass('day5');
-  }
-  if (index===5){
-    $weatherTab.addClass('active');
-    $eventDiv.addClass('day6');
-  }
-  if (index===6){
-    $weatherTab.addClass('active');
-    $eventDiv.addClass('day7');
-  }
-  if (index===7){
-    $weatherTab.addClass('active');
-    $eventDiv.addClass('day3');
-  }
-  $eventDiv.appendTo($mainDiv)
+  console.log("empty function");
 }
-
-
-// function eventParser() {
-// 	var severalEvents = mapEvents;
-//   // console.log(severalEvents);
-//
-//   for (var i = 0; i < severalEvents.length; i++) {
-//     var singleEvent = severalEvents[i];
-//     var title = singleEvent.title;
-//     var category = singleEvent.type;
-//     var location = singleEvent.venue_name;
-//   }
-// }
+empty();
 
 
 $(function() {
-  console.log("YO WUT UP");
 
   $('.ui.dropdown').dropdown();
   var $form = $(".search-form");
@@ -144,9 +133,10 @@ $(function() {
   });
 
 
-
   $('.ui.accordion').accordion();
 
-
+  $('.ui.modal')
+    .modal('hide')
+  ;
 
 });// onLoad

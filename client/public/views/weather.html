@@ -16,6 +16,25 @@
   </head>
   <body>
 
+    <!-- MODAL -->
+    <div class="ui modal">
+      <i class="close icon"></i>
+      <div class="header">
+      </div>
+      <div class="image content">
+        <div class="description">
+          <div class="location">
+            <h3>Location:</h3>
+          </div>
+          <h3>Event Time:</h3>
+        </div>
+      </div>
+      <div class="actions">
+        <div id="save-event" class="ui button primary">Favorite <i class="heart icon"></i></div>
+      </div>
+    </div>
+
+
     <div class="container">
 
       <!-- SIDEBAR START -->
@@ -39,12 +58,11 @@
      </div> -->
 
         <div id='drop' class="ui selection dropdown">
-          <input type="hidden" name="gender">
           <i class="dropdown icon"></i>
           <div class="default text">Event Type</div>
           <div class="menu">
-            <div class="item" value="0">Indoor</div>
-            <div class="item" value="1">Outdoor</div>            <div class="item" value="2">All</div>
+            <div class="item" value="1">Indoor</div>
+            <div class="item" value="2">Outdoor</div>            <div class="item" value="0">All</div>
           </div>
         </div>
 
@@ -78,13 +96,11 @@
               Login
             </button>
           </a> -->
-
           <a href="/user">
             <button id="account" class="ui inverted button">
               Account
             </button>
           </a>
-
           <!-- <button id="logout" class="ui inverted button">
             Logout
           </button> -->
@@ -98,10 +114,12 @@
       <div class="content-section">
         <div id="data-accordion" class="ui styled fluid accordion">
 
-
-
         </div>
       </div>
+
+
+
+
 
     </div>
 
