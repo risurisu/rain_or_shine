@@ -437,37 +437,35 @@ function showsRender(obj){
   if (obj.type == 'comedy' || obj.type== 'shows' || obj.type == 'broadway_tickets_national' || obj.type == 'theater')
   {
    title = $('<h3>').addClass("event-title").text(obj.title);
+   type = $('<h4>').text(obj.type);
    title.click(function(e){
      e.stopPropagation();
      eventTitleHandler(obj);
    });
 
-type = $('<h4>').text(obj.type);
-
 
 
 
    if(obj.day==0){
-     $('.day7').append(title)
-
+     $('.day7').append(title, type)
    }
    if(obj.day==1){
-     $('.day1').append(title)
+     $('.day1').append(title, type)
    }
    if(obj.day==2){
-     $('.day2').append(title)
+     $('.day2').append(title, type)
    }
    if(obj.day==3){
-     $('.day3').append(title)
+     $('.day3').append(title, type)
    }
    if(obj.day==4){
-     $('.day4').append(title)
+     $('.day4').append(title, type)
    }
    if(obj.day==5){
-     $('.day5').append(title)
+     $('.day5').append(title, type)
    }
    if(obj.day==6){
-     $('.day6').append(title)
+     $('.day6').append(title, type)
    }
   }
 }
@@ -478,18 +476,22 @@ function eventTitleHandler(obj){
     time = $('<p>').text(obj.time);
     venuename = $('<p>').text(obj.venue_name);
     venueaddress = $('<p>').text(obj.venue_address);
+
+    $(".close").on("click", function(){
+      $(".header").empty();
+      $(".time-tag").empty();
+      $(".location-tag").empty();
+      console.log("You emptied your modal!");
+    })
+
     $(".header").append(title);
-    $(".location").append(venuename, venueaddress);
-    $(".description").append(time);
+    $(".location-tag").append(venuename, venueaddress);
+    $(".time-tag").append(time);
     $('.ui.modal').modal('show');
+
 }
 
 function closeModal(){
-  $(".close").on("click", function(){
-    $(".header").empty();
-    $(".image.content").empty();
-    console.log("You emptied your modal!");
-  })
 }
 closeModal();
 

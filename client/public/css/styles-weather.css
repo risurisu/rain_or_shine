@@ -169,15 +169,20 @@ nav {
 .shows-title {
   font-size: 18px;
 }
-.actions {
-  text-align: center;
+
+.ui.modal>.actions {
+  text-align: center;;
 }
 .heart {
+  margin: 0;
+}
+.ui.button>.icon:not(.button) {
   margin: 0;
 }
 #save-event {
   margin: 0;
   margin-bottom: 15px;
+  text-align: center;
 }
 .event-title {
   border-bottom: 1px dotted #e0e0e0;
@@ -193,7 +198,9 @@ nav {
   border-bottom: none;
   padding-bottom: 0;
 }
-
+.time {
+  margin-top: 15px;
+}
 
 
 @media (min-width:720px) and (max-width: 899px) {
