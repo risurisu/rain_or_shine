@@ -26,8 +26,10 @@ function getData(zip){
   var key = "3cf4bf019f05b262b3e7ae8f899feebe"
 
   // query the API here!
+  $("#loaderImage").show();
   $.getJSON('http://api.openweathermap.org/data/2.5/forecast/daily?zip=' + zip + '&units=imperial&cnt=7' + '&APPID=' + key, function(data){
     console.log(data);
+    $("#loaderImage").hide();
     var allDates = data.list;
 
     for (var i = 0; i < allDates.length; i++) {
