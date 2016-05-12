@@ -7,7 +7,8 @@ var UserSchema = mongoose.Schema({
   username: { type: String, required: true },
   email: { type: String, required: true },
   password: { type: String },
-  events: { type: Array }
+  events: { type: Array },
+//  searches: { type: Array }    // to allow saved user data. find this being called in weather.js
 }, { timestamps: true });
 
 UserSchema.pre('save', function(next){

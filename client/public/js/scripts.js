@@ -1,5 +1,9 @@
 console.log("OWLS IN THE HOUSE");
 
+// $pastSearches = $("#past-searches")
+
+// $pastSearches.append ( $newTemp )  // allows to appear on user profile
+
 var auth = auth || {};
 
 auth.bindLoginForm = function(){
@@ -166,6 +170,38 @@ auth.signUpSuccess = function(data, status, jqXHR) {
 auth.signUpFailure = function(jqXHR) {
   auth.showAlert("There was an error. Try again!");
 }
+
+
+
+// $weatherSearch.submit(function(event){
+//   event.preventDefault();         // so form does not submit
+//
+//   city = $weatherSearch.find("[name=weather]").val();    // grab weather text value
+//
+//   $.ajax({ method: "get",
+//             url: "http://api.openweathermap.org/data/2.5/weather",
+//             data: {
+//               APPID: "1f28dd1e99009db01e1b392354c4d6c9",
+//               q: city,
+//               units: "imperial"
+//             }
+//         }).success( function(data){            // ADD ADDITIONAL DATA HERE. MAYBE FOR EVENTS??
+//             // saving on our server under the current user
+//             $.ajax({ method: "post",
+//                      url: "/weather",
+//                      data: { weather:{
+//                               location: city,
+//                               temperature: data.main.temp      // taken from weatherSchema in weather model 
+//                               }
+//                      }
+//                   }).success( renderWeather );   // + renderEvent??
+//         });
+// }); // weatherSearch
+//
+// $logoutLink.click(function(e){
+//     Cookies.remove("jwt_token");
+//     location.reload();      // refresh the page on logout
+// });
 
 $(function(){
   auth.checkLoggedInStatus();

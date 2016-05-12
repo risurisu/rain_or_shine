@@ -5,3 +5,5 @@ $(".search").click(function(){
   //this will redirect us in same window
   document.location.href = weather.html;
 });
+
+// $("#thunder").appendTo(.weather)

@@ -8,7 +8,21 @@ var express = require('express'),
 
 router.get('/', function(req, res, next) {
   res.sendFile( path.resolve('client/public/views/weather.html') );
+//  res.json (req.user.searches);
 });
+  //
+  // Weather.create(req.body.weather, function (err, weather){
+  //   console.log("output: " + weather);
+  //   if (err) { res.status(500).json(err) }
+  //   req.user.searches.push(weather); // push/update weather data to user profile     // searches is array in user model
+  //   req.user.save(function(err){    // save the data or it wont work!
+  //     console.log(err)
+  //   });
+  //   res.json( weather );   // object called in the success callback in scripts.js
+  // })
+
+
+
 
 // router.use( passport.authenticate("jwt"));
 //
